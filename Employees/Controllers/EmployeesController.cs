@@ -1,5 +1,6 @@
 ﻿using Employees.DB;
 using Employees.DBModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,22 @@ namespace Employees.Controllers
             return employee;
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("Create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<bool>> createEmployee(Employee employee)
         {
+            int lReturn = -1;
+
+            _context.Add(employee);
+           lReturn = _context.SaveChanges();
+
+            if (lReturn == 1)
+                return Ok(true);
+            else
+                return Problem("DB doesnt consume data", "createEmployee", 500, "EmployeesController", "Error");
+
         }
 
         // PUT api/<ValuesController>/5
