@@ -14,7 +14,7 @@ namespace Employees.DB
                 id = 1,
                 name = "David",
                 surname = "Novák",
-                dateOfBirth = new DateTime(1985,11,5).Date
+                dateOfBirth = new DateTime(1985, 11, 5).ToString("dd-mm-yyyy")
             };
 
             context.employees.Add(testUser1);

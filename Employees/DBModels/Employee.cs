@@ -10,6 +10,6 @@ namespace Employees.DBModels
 
         public string surname { get; set; }
 
-        public DateTime dateOfBirth  { get; set; }
+        public string dateOfBirth  { get; set; }
     }
 }
