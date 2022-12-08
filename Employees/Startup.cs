@@ -1,6 +1,8 @@
+using Employees.DB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +31,8 @@ namespace Employees
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API Docs", Version = "v1" });
             });
 
+            services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("Employess"));
+
             services.AddControllers();
         }
 
@@ -39,6 +43,10 @@ namespace Employees
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var scopeeee = app.ApplicationServices.CreateScope();
+            ApiContext context = scopeeee.ServiceProvider.GetRequiredService<ApiContext>();
+            DBData.AddTestData(context);
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
