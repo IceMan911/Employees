@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -106,6 +107,38 @@ namespace Employees.Controllers
             }
 
             return true;
+        }
+
+        [HttpGet("{sortBy?}/{sortType?}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> getEmployees(string sortBy, string sortType = "id")
+        {
+            sortType = sortType.ToLower();
+            sortBy = sortBy.ToLower();
+
+            switch (sortType)
+            {
+                case "id":
+                    if (sortBy == "descending")
+                        return await _context.employees.OrderByDescending(x => x.id).ToListAsync();
+                    else
+                        return await _context.employees.OrderBy(x => x.id).ToListAsync();
+
+                case "dateofbirth":
+                    if (sortBy == "descending")
+                        return await _context.employees.OrderByDescending(x => x.dateOfBirth).ToListAsync();
+                    else
+                        return await _context.employees.OrderBy(x => x.dateOfBirth).ToListAsync();
+
+                case "surname":
+                    if (sortBy == "descending")
+                        return await _context.employees.OrderByDescending(x => x.surname).ToListAsync();
+                    else
+                        return await _context.employees.OrderBy(x => x.surname).ToListAsync();
+
+                default:
+                    return BadRequest();
+            }
+
         }
 
         private bool EmployeeExists(uint id)
