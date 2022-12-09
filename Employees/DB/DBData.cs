@@ -4,6 +4,10 @@ namespace Employees.DB
 {
     public static class DBData
     {
+        /// <summary>
+        /// creating data for testing and filling DbContext
+        /// </summary>
+        /// <param name="context"> DBContext for employees </param>
         public static void AddTestData(ApiContext context)
         {
             var testUser1 = new DBModels.Employee
