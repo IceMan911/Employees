@@ -12,9 +12,9 @@ namespace Employees.DB
             var testUser1 = new DBModels.Employee
             {
                 id = 1,
-                name = "David",
+                name = "Václav",
                 surname = "Novák",
-                dateOfBirth = new DateTime(1985, 11, 5).ToString("dd-mm-yyyy")
+                dateOfBirth = new DateTime(1985, 11, 5).ToString("d.MM.yyyy")
             };
 
             context.employees.Add(testUser1);
