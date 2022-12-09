@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace Employees.Controllers
 {
@@ -82,7 +80,6 @@ namespace Employees.Controllers
             }
 
             return NoContent();
-
         }
 
         [HttpDelete("{id}")]
@@ -138,7 +135,6 @@ namespace Employees.Controllers
                 default:
                     return BadRequest();
             }
-
         }
 
         private bool EmployeeExists(uint id)

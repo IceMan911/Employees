@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Employees.DBModels
+﻿namespace Employees.DBModels
 {
     public class Employee
     {

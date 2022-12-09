@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Employees.DB
 {
@@ -39,7 +36,5 @@ namespace Employees.DB
 
             context.SaveChanges();
         }
-
-
     }
 }
