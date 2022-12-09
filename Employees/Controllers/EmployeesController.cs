@@ -25,8 +25,7 @@ namespace Employees.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> getEmployee(uint id)
         {
-
-            var employee = _context.employees.FirstOrDefault(x => x.id == id);
+            var employee = await _context.employees.FindAsync(id);
 
             if (employee == null)
             {
@@ -85,10 +84,28 @@ namespace Employees.Controllers
 
         }
 
-        // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(uint id)
         {
+            try
+            {
+                var employee = await _context.employees.FindAsync(id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+
+                _context.employees.Remove(employee);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                // logging error
+                return false;
+            }
+
+            return true;
         }
 
         private bool EmployeeExists(uint id)
